@@ -50,4 +50,12 @@ public class Request {
         }
         return data.length;
     }
+
+    public boolean isRapitPacket(){
+        return false;
+    }
+
+    public void execue(){
+
+    }
 }

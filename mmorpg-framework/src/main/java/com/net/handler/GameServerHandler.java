@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
  * 接收消息处理类
  */
 @Component
-public class ServerHandler extends SimpleChannelInboundHandler{
-    private static Logger logger = LoggerFactory.getLogger(ServerHandler.class);
+public class GameServerHandler extends SimpleChannelInboundHandler{
+    private static Logger logger = LoggerFactory.getLogger(GameServerHandler.class);
 
     /**
      * 接收消息

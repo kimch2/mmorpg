@@ -2,7 +2,7 @@ package com.net;
 
 import com.net.codec.RequestDecoder;
 import com.net.codec.ResponseEncoder;
-import com.net.handler.ServerHandler;
+import com.net.handler.GameServerHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -44,8 +44,8 @@ public class NetServer {
                             pipeline.addLast("IdleStateHandler",new IdleStateHandler(0,0,180));
                             pipeline.addLast("WriteTimeoutHandler",new WriteTimeoutHandler(60));
                             pipeline.addLast("reqDecoder",new RequestDecoder());
+                            pipeline.addLast("serverHandler",new GameServerHandler());
                             pipeline.addLast("respEncoder",new ResponseEncoder());
-                            pipeline.addLast("serverHandler",new ServerHandler());
                         }
                     }).option(ChannelOption.SO_BACKLOG,128)
                     .childOption(ChannelOption.SO_KEEPALIVE,true);
