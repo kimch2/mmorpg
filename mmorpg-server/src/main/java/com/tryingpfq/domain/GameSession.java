@@ -1,8 +1,14 @@
 package com.tryingpfq.domain;
 
+import com.net.codec.Response;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 public class GameSession {
     private static final Logger logger = LoggerFactory.getLogger(GameSession.class);
@@ -89,5 +95,43 @@ public class GameSession {
 
     public void setServer(String server) {
         this.server = server;
+    }
+
+    public void sendPacket(Response packet) {
+        if(packet == null){
+            return ;
+        }
+/*      Response response = packet.write()
+        if(response == null){
+            return;
+        }
+        write(response)*/
+    }
+
+    public boolean write(Response response){
+        if(channel instanceof NullChannel){
+            return false;
+        }
+        if(response != null){
+            channel.writeAndFlush(response);
+            return true;
+        }
+        return false;
+    }
+
+    private void scheduleFlush(final ChannelFuture writeFuture){
+        final ScheduledFuture<?> sf = channel.eventLoop().schedule(new Runnable() {
+            public void run() {
+                if(!writeFuture.isDone()){
+                    channel.flush();
+                }
+            }
+        },30,TimeUnit.MILLISECONDS);
+
+        writeFuture.addListener(new ChannelFutureListener() {
+            public void operationComplete(ChannelFuture channelFuture) throws Exception {
+                sf.cancel(false);
+            }
+        });
     }
 }

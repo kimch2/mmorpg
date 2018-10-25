@@ -2,6 +2,7 @@ package com.tryingpfq.domain;
 
 import com.base.Point;
 import com.net.codec.Request;
+import com.net.codec.Response;
 import com.tryingpfq.base.rpc.IPlayerMessage;
 import com.tryingpfq.utils.Profile;
 import com.tryingpfq.utils.TimeUtils;
@@ -247,5 +248,18 @@ public class Player {
 
     public void setPlayerMessageEnable(AtomicBoolean playerMessageEnable) {
         this.playerMessageEnable = playerMessageEnable;
+    }
+
+    /**
+     * 用于服务端向客服端返回数据
+     */
+    public void sendPacket(Response packet){
+        try{
+            if(gameSession != null){
+                gameSession.sendPacket(packet);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
