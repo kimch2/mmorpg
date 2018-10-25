@@ -19,7 +19,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class NetServer {
     private static Logger logger = LoggerFactory.getLogger(NetServer.class);
-    private static int port = 1111;
+    private static int port = 6666;
 
     EventLoopGroup boss = new NioEventLoopGroup();
     EventLoopGroup worker = new NioEventLoopGroup();
@@ -50,7 +50,7 @@ public class NetServer {
                     }).option(ChannelOption.SO_BACKLOG,128)
                     .childOption(ChannelOption.SO_KEEPALIVE,true);
             ChannelFuture f = b.bind(port).sync(); //异步的绑定服务器
-            logger.info("NetServer Bind port{}",port);
+            logger.info("NetServer Bind port {}",port);
 
         }catch (Exception e){
             boss.shutdownGracefully();
