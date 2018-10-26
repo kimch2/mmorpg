@@ -1,6 +1,7 @@
 package com.tryingpfq.domain;
 
 import com.net.codec.Response;
+import com.tryingpfq.domain.enums.CloseCause;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
@@ -21,6 +22,8 @@ public class GameSession {
 
     private long uId;  //用户ID
 
+    private int key;
+
     private Player player;
 
     private GameSessionStatus status = GameSessionStatus.INIT;
@@ -28,6 +31,8 @@ public class GameSession {
     private String ip;
 
     private String server;
+
+    private boolean registered;
 
     public static Logger getLogger() {
         return logger;
@@ -97,6 +102,24 @@ public class GameSession {
         this.server = server;
     }
 
+    public int getKey() {
+        return key;
+    }
+
+    public void setKey(int key) {
+        this.key = key;
+    }
+
+    public boolean isRegistered(){
+        return registered;
+    }
+
+    public void setRegistered(){
+        this.registered = true;
+    }
+    public String getAsKey(){
+        return account_server;
+    }
     public void sendPacket(Response packet) {
         if(packet == null){
             return ;
@@ -133,5 +156,18 @@ public class GameSession {
                 sf.cancel(false);
             }
         });
+    }
+
+    public void close(CloseCause cause,String... ip){
+        try{
+            if(channel.isOpen()){
+                channel.close();
+                logger.info("CloseSession[{}] due to Cause[{}] {}",getAccount(),cause,ip);
+            }else{
+                logger.info("AlreadyCloseSession[{}] due to Cause[{}] {}",getAccount(),cause,ip);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }

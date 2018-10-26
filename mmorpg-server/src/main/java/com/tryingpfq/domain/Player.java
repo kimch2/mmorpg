@@ -4,6 +4,7 @@ import com.base.Point;
 import com.net.codec.Request;
 import com.net.codec.Response;
 import com.tryingpfq.base.rpc.IPlayerMessage;
+import com.tryingpfq.role.entity.PlayerEntity;
 import com.tryingpfq.utils.Profile;
 import com.tryingpfq.utils.TimeUtils;
 import org.slf4j.Logger;
@@ -23,7 +24,7 @@ public class Player {
     /**
      * 场景中每个对象有个Id
      */
-    private int id;
+    private long id;
 
     /**
      * 目标传送场景ID
@@ -66,8 +67,12 @@ public class Player {
     /**
      * 该玩家是否处于可发内部消息的状态
      */
-    private AtomicBoolean playerMessageEnable = new AtomicBoolean(false);
+    private AtomicBoolean playerMessageEnable = new AtomicBoolean();
 
+    /**
+     * 玩家实体
+     */
+    private PlayerEntity playerEntity;
 
 
     /**
@@ -226,11 +231,22 @@ public class Player {
         this.movePacketQueue = movePacketQueue;
     }
 
-    public int getId() {
+    public String getName() {
+        return playerEntity.getName();
+    }
+
+    public String getAccout(){
+        return  playerEntity.getAccount();
+    }
+    public void setName(String name) {
+        this.playerEntity.setName(name);
+    }
+
+    public long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
