@@ -9,7 +9,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * Created by trying on 2018/10/26.
  * 线程处理
  */
-public abstract class MagicalGod implements Runnable{
+public abstract class MagicalGod implements BaseGod{
     private final static Logger log = LoggerFactory.getLogger(MagicalGod.class);
 
     /** 是否在运行 **/
@@ -18,6 +18,7 @@ public abstract class MagicalGod implements Runnable{
     /** 最后执行时间 **/
     private long lastExecuteTimeMillis = System.currentTimeMillis();
 
+    @Override
     public void run() {
         int costTime = 0;
 
@@ -71,12 +72,6 @@ public abstract class MagicalGod implements Runnable{
     public abstract String getName();
 
     public abstract int getProcessPeriod();
-
-    public void init(){
-        running.set(true);
-        updateLastExecuteTimeMillis();
-    }
-
     public AtomicBoolean getRunning() {
         return running;
     }
@@ -91,5 +86,16 @@ public abstract class MagicalGod implements Runnable{
 
     public void setLastExecuteTimeMillis(long lastExecuteTimeMillis) {
         this.lastExecuteTimeMillis = lastExecuteTimeMillis;
+    }
+
+    @Override
+    public void init() {
+        running.set(true);
+        updateLastExecuteTimeMillis();
+    }
+
+    @Override
+    public void stop() {
+        running.compareAndSet(true,false);
     }
 }

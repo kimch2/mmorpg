@@ -7,12 +7,15 @@ import org.apache.commons.lang3.time.StopWatch;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * Created by trying on 2018/10/26.
  */
 public class Scene extends MagicalGod implements Cloneable {
+
+    private Map<Integer,Integer> map = new ConcurrentHashMap<Integer, Integer>();
     /** 场景ID **/
     private int sceneId;
 
@@ -77,8 +80,9 @@ public class Scene extends MagicalGod implements Cloneable {
         return TICK_TIME;
     }
 
+    @Override
     public void init() {
-
+        super.init();
     }
 
     @Override
