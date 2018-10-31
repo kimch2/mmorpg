@@ -1,4 +1,5 @@
 import com.net.NetServer;
+import com.tryingpfq.scene.service.SceneService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -11,9 +12,10 @@ import org.springframework.util.StopWatch;
 public class GameServerStart {
     private static Logger logger = LoggerFactory.getLogger(GameServerStart.class);
     private static int port = 1111;
-    static {
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 
+    private static ApplicationContext context;
+    static {
+        context = new ClassPathXmlApplicationContext("applicationContext.xml");
     }
 
     private static NetServer netServer = new NetServer();
@@ -25,7 +27,9 @@ public class GameServerStart {
     }
 
     public void start(){
-
+        //加载场景
+        SceneService sceneService = context.getBean(SceneService.class);
+        sceneService.loadSceneDataInfo();
         netServer.start();
     }
 

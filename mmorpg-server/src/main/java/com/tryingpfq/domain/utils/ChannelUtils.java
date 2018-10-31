@@ -1,4 +1,4 @@
-package com.utils;
+package com.tryingpfq.domain.utils;
 
 import com.tryingpfq.domain.GameSession;
 import io.netty.channel.Channel;
