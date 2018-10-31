@@ -4,6 +4,8 @@ import com.thread.MagicalGod;
 import com.tryingpfq.domain.Player;
 import com.tryingpfq.scene.message.ISceneMessage;
 import org.apache.commons.lang3.time.StopWatch;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +16,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * Created by trying on 2018/10/26.
  */
 public class Scene extends MagicalGod implements Cloneable {
+    private final static Logger logger = LoggerFactory.getLogger(Scene.class);
+
 
     private Map<Integer,Integer> map = new ConcurrentHashMap<Integer, Integer>();
     /** 场景ID **/
@@ -43,6 +47,17 @@ public class Scene extends MagicalGod implements Cloneable {
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 加载场景中的数据
+     */
+    public void initializeData(){
+        //加载地图
+        //加载NPC
+        //加载玩家
+        //加载怪物
+
     }
 
     /**

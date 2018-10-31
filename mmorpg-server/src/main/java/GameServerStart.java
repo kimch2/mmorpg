@@ -36,7 +36,6 @@ public class GameServerStart {
     public void stop() {
         StopWatch sw = new StopWatch();
         sw.start();
-
         logger.info("StopWatch onServerClose{}", sw.getTotalTimeMillis());
         netServer.close();
     }
