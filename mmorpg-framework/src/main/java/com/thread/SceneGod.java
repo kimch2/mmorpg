@@ -1,6 +1,5 @@
 package com.thread;
 
-import com.tryingpfq.scene.Scene;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +15,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  */
 public class SceneGod {
 
-    private final static Logger log = LoggerFactory.getLogger(Scene.class);
+    private final static Logger log = LoggerFactory.getLogger(SceneGod.class);
 
     private final static SceneGod instance = new SceneGod();
 
