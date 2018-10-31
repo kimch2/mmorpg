@@ -20,6 +20,7 @@ public class ChannelUtils {
     public static final boolean addChannelSession(Channel channle,GameSession session){
         Attribute<GameSession> sessionAttribute = channle.attr(SESION_LEY);
         return sessionAttribute.compareAndSet(null,session);
+
     }
 
     /**
