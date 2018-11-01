@@ -8,8 +8,8 @@ import javax.annotation.PostConstruct;
 /**
  * @author tryingpfq
  * @date 2018/11/1
- * \--4字节--\-2字节-\-------data-------\
- *  协议长度   协议id     协议数据
+ * |  --4字节--  | -2字节- |-------data-------|
+ *  协议长度     协议id     议数据
  */
 @Component
 public abstract class AbstractPacket {
