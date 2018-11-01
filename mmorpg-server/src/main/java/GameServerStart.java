@@ -1,4 +1,4 @@
-import com.net.NetServer;
+import com.tryingpfq.server.NetServer;
 import com.tryingpfq.scene.service.SceneService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +17,6 @@ public class GameServerStart {
     static {
         context = new ClassPathXmlApplicationContext("applicationContext.xml");
     }
-
     private static NetServer netServer = new NetServer();
 
     public static void main(String[] args) {
