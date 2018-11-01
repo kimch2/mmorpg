@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * @author tryingpfq
  * @date 2018/11/1 16:28
- * 编/解码器
+ * 编 / 解码器
  */
 public class BinaryWebSocketFrameCodec extends MessageToMessageCodec<BinaryWebSocketFrame,AbstractPacket> {
     private static final Logger logger = LoggerFactory.getLogger(BinaryWebSocketFrameCodec.class);
