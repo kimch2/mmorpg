@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
-public class GameSession {
+public class GameSession implements Session{
     private static final Logger logger = LoggerFactory.getLogger(GameSession.class);
 
     private Channel channel;
@@ -38,8 +38,13 @@ public class GameSession {
         return logger;
     }
 
+
     public Channel getChannel() {
         return channel;
+    }
+
+    public int getId() {
+        return key;
     }
 
     public void setChannel(Channel channel) {
