@@ -1,6 +1,13 @@
 package com.tryingpfq.scene.service;
 
+
+/**
+ * Created by trying on 2018/10/30.
+ */
 public interface ISceneService {
 
-    public void loadSceneDataInfo();
+    /**
+     *加载场景数据
+     */
+    public void initSceneDataInfo(int sceneId);
 }
