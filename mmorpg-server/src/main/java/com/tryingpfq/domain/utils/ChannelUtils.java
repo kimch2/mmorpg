@@ -1,6 +1,7 @@
 package com.tryingpfq.domain.utils;
 
 import com.tryingpfq.domain.GameSession;
+import com.tryingpfq.domain.Session;
 import io.netty.channel.Channel;
 import io.netty.util.Attribute;
 import io.netty.util.AttributeKey;
@@ -9,7 +10,7 @@ import java.net.InetSocketAddress;
 
 public class ChannelUtils {
 
-    private static final AttributeKey<GameSession> SESION_LEY = AttributeKey.valueOf("session-key");
+    private static final AttributeKey<Session> SESSION_LEY = AttributeKey.valueOf("session-key");
 
     /**
      * 添加会话
@@ -17,8 +18,8 @@ public class ChannelUtils {
      * @param session
      * @return
      */
-    public static final boolean addChannelSession(Channel channle,GameSession session){
-        Attribute<GameSession> sessionAttribute = channle.attr(SESION_LEY);
+    public static final boolean addChannelSession(Channel channle,Session session){
+        Attribute<Session> sessionAttribute = channle.attr(SESSION_LEY);
         return sessionAttribute.compareAndSet(null,session);
 
     }
@@ -28,8 +29,8 @@ public class ChannelUtils {
      * @param channel
      * @return
      */
-    public static final GameSession getChannelSession(Channel channel){
-        Attribute<GameSession> sessionAttr = channel.attr(SESION_LEY);
+    public static final Session getChannelSession(Channel channel){
+        Attribute<Session> sessionAttr = channel.attr(SESSION_LEY);
         return sessionAttr.get();
     }
 
@@ -38,7 +39,7 @@ public class ChannelUtils {
      * @param channel
      */
     public static final void removeChannelSession(Channel channel){
-        Attribute<GameSession> sessionAttr = channel.attr(SESION_LEY);
+        Attribute<Session> sessionAttr = channel.attr(SESSION_LEY);
         if(sessionAttr != null){
             sessionAttr.remove();
         }
@@ -54,7 +55,7 @@ public class ChannelUtils {
     }
 
     public static final String getAccount(Channel channel){
-        GameSession session = getChannelSession(channel);
+        GameSession session = (GameSession) getChannelSession(channel);
         if(session != null){
             return session.getAccount();
         }

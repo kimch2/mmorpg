@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class GameSession implements Session{
     private static final Logger logger = LoggerFactory.getLogger(GameSession.class);
@@ -21,6 +22,8 @@ public class GameSession implements Session{
     private String account_server;
 
     private long uId;  //用户ID
+
+    private int id;
 
     private int key;
 
@@ -34,17 +37,25 @@ public class GameSession implements Session{
 
     private boolean registered;
 
+    private static final AtomicInteger SEQ = new AtomicInteger(1);
+
     public static Logger getLogger() {
         return logger;
     }
 
+    public static Session valueOf(Channel channel){
+        GameSession gameSession = new GameSession();
+        gameSession.id = SEQ.getAndIncrement();
+        gameSession.channel = channel;
+        return gameSession;
+    }
 
     public Channel getChannel() {
         return channel;
     }
 
     public int getId() {
-        return key;
+        return id;
     }
 
     public void setChannel(Channel channel) {

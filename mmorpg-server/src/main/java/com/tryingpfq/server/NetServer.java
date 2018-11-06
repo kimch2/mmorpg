@@ -1,6 +1,7 @@
 package com.tryingpfq.server;
 
 import com.tryingpfq.net.handler.BinaryWebSocketFrameCodec;
+import com.tryingpfq.net.handler.GameSessionHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -74,6 +75,7 @@ public class NetServer {
                 //因为nett是分段请求的
                 ch.pipeline().addLast("aggregator",new HttpObjectAggregator(65535));
                 ch.pipeline().addLast(new WebSocketServerProtocolHandler("/ws"));
+                ch.pipeline().addLast("gameSessionHandler",new GameSessionHandler());
                 ch.pipeline().addLast("binaryWebSocketFrameCodec",new BinaryWebSocketFrameCodec());
             }
         };
