@@ -18,9 +18,6 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class Scene extends MagicalGod implements Cloneable {
     private final static Logger logger = LoggerFactory.getLogger(Scene.class);
 
-
-    private final static Logger logger = LoggerFactory.getLogger(Scene.class);
-
     private Map<Integer,Integer> map = new ConcurrentHashMap<Integer, Integer>();
     /** 场景ID **/
     private int sceneId;
