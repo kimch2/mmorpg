@@ -1,4 +1,4 @@
-package com.tryingpfq.packet;
+package com.tryingpfq.common.packet;
 
 import com.baidu.bjf.remoting.protobuf.Codec;
 import com.baidu.bjf.remoting.protobuf.ProtobufProxy;

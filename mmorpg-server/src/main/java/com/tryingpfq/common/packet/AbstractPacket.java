@@ -1,6 +1,6 @@
-package com.tryingpfq.packet;
+package com.tryingpfq.common.packet;
 
-import com.tryingpfq.utils.ProtoFileUtils;
+import com.tryingpfq.common.utils.ProtoFileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -11,7 +11,6 @@ import javax.annotation.PostConstruct;
  * |  --4字节--  | -2字节- |-------data-------|
  *  协议长度     协议id     议数据
  */
-@Component
 public abstract class AbstractPacket {
 
     @Autowired
