@@ -8,9 +8,10 @@
 	   http://www.springframework.org/schema/context/spring-context.xsd">
 
 
-    <context:component-scan base-package="com.*"/>
-
-    <context:annotation-config></context:annotation-config>
+    <context:component-scan base-package="com.tryingpfq">
+        <context:include-filter type="annotation" expression="com.annotation.Packet"/>
+        <context:include-filter type="annotation" expression="com.annotation.WsController"/>
+    </context:component-scan>
 
     <!--处理线程池-->
     <bean name="dispatcherThreadPoolExecutor" class="com.thread.DispatcherThreadPoolExecutor">
