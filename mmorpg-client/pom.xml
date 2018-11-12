@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>com.tryingpfq</groupId>
-            <artifactId>mmorpg-framework</artifactId>
+            <artifactId>mmorpg-server</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>
