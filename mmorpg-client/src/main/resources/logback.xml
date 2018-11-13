@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-    <contextName>gameServer</contextName>
+    <contextName>clientServer</contextName>
 
     <!-- 定义日志文件-->
-    <property name="log_dir" value="./logs/server" />
+    <property name="log_dir" value="./logs/client" />
     <!-- 最大日志数量 -->
     <property name="maxHistory" value="30" />
 

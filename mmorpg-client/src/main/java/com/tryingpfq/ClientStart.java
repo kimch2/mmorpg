@@ -17,12 +17,12 @@ public class ClientStart {
     private static ApplicationContext context;
 
     static{
-        context = new ClassPathXmlApplicationContext("clientppAlicationContext.xml");
+        context = new ClassPathXmlApplicationContext("clientApplicationContext.xml");
     }
 
     public static void main(String[] args) {
         Preconditions.checkNotNull(context);
         GameClientStart gameClientStart = context.getBean(GameClientStart.class);
-
+        gameClientStart.start();
     }
 }

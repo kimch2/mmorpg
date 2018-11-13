@@ -12,20 +12,15 @@ import javax.annotation.PostConstruct;
  *  协议长度     协议id     议数据
  */
 public abstract class AbstractPacket {
-
     @Autowired
     private PacketId packetId;
 
     public abstract short getPacketId();
 
-    public void setPacketId(PacketId packetId) {
-        this.packetId = packetId;
-    }
-
     @PostConstruct
-    public void init(){
-        ProtoFileUtils.createProtoFile(this);
-
+    protected void init(){
+       // ProtoFileUtils.createProtoFile(this);
+        System.out.println(System.currentTimeMillis());
         packetId.registerPacketId2AbstractPacket(this);
         packetId.registerPacketId2Codec(this);
     }
