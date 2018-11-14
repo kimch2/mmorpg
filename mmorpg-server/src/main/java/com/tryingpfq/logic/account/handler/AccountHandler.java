@@ -22,9 +22,9 @@ public class AccountHandler {
     public AbstractPacket login(GameSession session, ReqLoginPacket packet){
         RespLoginPacket  respPacket = new RespLoginPacket();
         if(accountService.login(packet.getAccount(),packet.getPsw())){
-            respPacket.setStatus((byte)1);
+            respPacket.setStatus(1);
         }else{
-            respPacket.setStatus((byte)0);
+            respPacket.setStatus(0);
         }
         return respPacket;
     }

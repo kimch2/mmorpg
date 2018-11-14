@@ -12,13 +12,13 @@ import com.tryingpfq.common.packet.PacketId;
 @Packet(PacketId.RESP_LOGIN)
 public class RespLoginPacket extends AbstractPacket {
     @Protobuf(description = "登陆结果")
-    private byte status;
+    private Integer status;
 
-    public byte getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(byte status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
