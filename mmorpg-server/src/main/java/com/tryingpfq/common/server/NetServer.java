@@ -1,6 +1,8 @@
 package com.tryingpfq.common.server;
 
+import com.tryingpfq.common.net.handler.BasePacketCodec;
 import com.tryingpfq.common.net.handler.BinaryWebSocketFrameCodec;
+import com.tryingpfq.common.net.handler.DispatcherHandler;
 import com.tryingpfq.common.net.handler.GameSessionHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -28,20 +30,14 @@ public class NetServer {
     EventLoopGroup boss = new NioEventLoopGroup();
     EventLoopGroup worker = new NioEventLoopGroup();
 
-    static {
-        ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
-
-    }
-
-    public void start(){
+    public void start(DispatcherHandler dispatcherHandler){
         //服务类
         ServerBootstrap b = new ServerBootstrap();
-
         try{
             b.group(boss,worker)
                     .channel(NioServerSocketChannel.class)  //指定所使用的NIO传输Channel
                     .handler(new LoggingHandler(LogLevel.INFO))
-                    .childHandler(buildChannelInitializer())
+                    .childHandler(buildChannelInitializer(dispatcherHandler))
                     .option(ChannelOption.SO_BACKLOG,128)
                     .childOption(ChannelOption.SO_KEEPALIVE,true);
                    /* .childHandler(new ChannelInitializer<SocketChannel>() {
@@ -66,7 +62,7 @@ public class NetServer {
         }
     }
 
-    public ChannelInitializer buildChannelInitializer(){
+    public ChannelInitializer buildChannelInitializer(final DispatcherHandler dispatcherHandler){
         return new ChannelInitializer<SocketChannel>(){
             @Override
             protected void initChannel(SocketChannel ch) {
@@ -79,7 +75,8 @@ public class NetServer {
                 ch.pipeline().addLast("aggregator",new HttpObjectAggregator(65535));
                 ch.pipeline().addLast(new WebSocketServerProtocolHandler("/ws"));
                 ch.pipeline().addLast("gameSessionHandler",new GameSessionHandler());
-                ch.pipeline().addLast("binaryWebSocketFrameCodec",new BinaryWebSocketFrameCodec());
+                ch.pipeline().addLast("binaryWebSocketFrameCodec",new BasePacketCodec());
+                ch.pipeline().addLast("dispatcherHandler",dispatcherHandler);
             }
         };
     }

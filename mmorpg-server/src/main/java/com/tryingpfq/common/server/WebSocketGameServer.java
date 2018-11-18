@@ -1,5 +1,6 @@
 package com.tryingpfq.common.server;
 
+import com.tryingpfq.common.net.handler.DispatcherHandler;
 import com.tryingpfq.logic.scene.service.SceneService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,11 +21,13 @@ public class WebSocketGameServer implements IGameServer {
     @Autowired
     private SceneService sceneService;
 
+    @Autowired
+    private DispatcherHandler dispatcherHandler; //目前发现问题 new的话 里面注入的bean为空
 
     @Override
     public void start() {
         sceneService.loadSceneDataInfo();
-        netServer.start();
+        netServer.start(dispatcherHandler);
     }
 
     @Override

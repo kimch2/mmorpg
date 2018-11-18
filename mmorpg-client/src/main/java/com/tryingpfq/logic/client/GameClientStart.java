@@ -27,7 +27,7 @@ public class GameClientStart {
     private static NetClient netClient = new NetClient();
 
     public void start(){
-        initAllPacket();
+      //  initAllPacket();
         netClient.start();
     }
     // TODO 将所有包进行注册

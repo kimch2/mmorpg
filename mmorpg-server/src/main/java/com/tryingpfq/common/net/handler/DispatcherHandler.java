@@ -9,14 +9,13 @@ import com.tryingpfq.common.domain.utils.ChannelUtils;
 import com.tryingpfq.common.net.dispatcher.InvokerDefinition;
 import com.tryingpfq.common.net.dispatcher.InvokerManager;
 import com.tryingpfq.common.packet.AbstractPacket;
-import io.netty.channel.ChannelHandler;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.SimpleChannelInboundHandler;
+import io.netty.channel.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
@@ -29,11 +28,12 @@ import java.util.Map;
  */
 @Component
 @ChannelHandler.Sharable
-public class DispatcherHandler extends SimpleChannelInboundHandler implements BeanPostProcessor {
+public class DispatcherHandler extends ChannelInboundHandlerAdapter implements BeanPostProcessor {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherHandler.class);
 
     private static Map<Class<? extends AbstractPacket>,Object> packet2Bean = Maps.newHashMap();
     private static Map<Class<? extends AbstractPacket>,Method> packet2Method = Maps.newHashMap();
+
     @Autowired
     private DispatcherThreadPoolExecutor dispatcherThreadPoolExecutor;
 
@@ -41,7 +41,7 @@ public class DispatcherHandler extends SimpleChannelInboundHandler implements Be
     private InvokerManager invokerManager;
 
     @Override
-    protected void channelRead0(final ChannelHandlerContext ctx, final Object msg) throws Exception {
+    public void channelRead(final ChannelHandlerContext ctx,final Object msg) throws Exception {
         final InvokerDefinition invokerDefinition = invokerManager.getInvokerDefinition(msg.getClass());
 
         dispatcherThreadPoolExecutor.submit(new BaseDispatcherTask() {
@@ -92,4 +92,5 @@ public class DispatcherHandler extends SimpleChannelInboundHandler implements Be
     public Object postProcessAfterInitialization(Object bean, String s) throws BeansException {
         return bean;
     }
+
 }

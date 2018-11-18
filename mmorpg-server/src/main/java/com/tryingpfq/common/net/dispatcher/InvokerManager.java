@@ -34,7 +34,7 @@ public class InvokerManager implements BeanPostProcessor{
 
     @Override
     public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-        return null;
+        return bean;
     }
 
     @Override
@@ -43,7 +43,6 @@ public class InvokerManager implements BeanPostProcessor{
         //WsController
         Annotation cAnno = clazz.getAnnotation(WsController.class);
         if(cAnno == null) return bean;
-
         if(cAnno != null){
             for(Method md : clazz.getMethods()){
                 Annotation mAnno = md.getAnnotation(WsRequest.class);

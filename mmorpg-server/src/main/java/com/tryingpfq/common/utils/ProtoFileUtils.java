@@ -16,36 +16,33 @@ import java.lang.annotation.Annotation;
 public class ProtoFileUtils {
     private static Logger logger = LoggerFactory.getLogger(ProtoFileUtils.class);
 
+    private static final String PATH = "protos";
+
     /**
      * 生成.proto文件
      * @param packet
      */
     public static void createProtoFile(AbstractPacket packet){
-        /**
-         * 增加对.proto文件的处理
-         */
+
         StringBuilder sb = new StringBuilder();
         String code = ProtobufIDLGenerator.getIDL(packet.getClass(),null,null,true);
         /**通过反射获取该包上注解 **/
-        Annotation descriptePacket = packet.getClass().getAnnotation(Packet.class);
+        Annotation annoPacket = packet.getClass().getAnnotation(Packet.class);
 
-        if(descriptePacket != null){
-            String des = ((Packet) descriptePacket).description();
+        if(annoPacket != null){
+            String des = ((Packet) annoPacket).description();
             if(des != null){
-                sb.append("//"+des);
+                sb.append("// "+des);
                 sb.append("\n"+code);
-
-                String path = "D:\\mmorpg\\protofile" + packet.getPacketId() + "_" + packet.getClass().getSimpleName()+"_"+des+".proto";
                 //生产文件
-                File file = new File(path);
+                File file = new File(PATH+File.separator+packet.getClass().getSimpleName()+"_"+des+".proto");
                 try{
-                    if(FileUtils.createFile(file)){
-                        FileWriter fw = new FileWriter(file);
-                        fw.write(sb.toString());
-                        fw.flush();
-                        fw.close();
-                        logger.info("生成文件:{}",file.getAbsolutePath());
-                    }
+                    boolean isnewFile = FileUtils.createFile(file);
+                    FileWriter fw = new FileWriter(file);
+                    fw.write(sb.toString());
+                    fw.flush();
+                    fw.close();
+                    logger.info("生成文件:{}",file.getAbsolutePath());
                 }catch (Exception e){
                     e.printStackTrace();
                     logger.error("文件创建失败");

@@ -38,6 +38,7 @@ public class NetClient {
             EventLoopGroup group = new NioEventLoopGroup();
             bootstrap.group(group)
                     .channel(NioSocketChannel.class)
+                    .remoteAddress("127.0.0.1",6666)
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         public void initChannel(SocketChannel ch) throws Exception {
@@ -47,7 +48,7 @@ public class NetClient {
                             ch.pipeline().addLast("clientHandler",new ClientHandler());
                         }
                     });
-            ChannelFuture f = bootstrap.bind("127.0.0.1",6666).sync();
+            ChannelFuture f = bootstrap.connect().sync();
             final Channel channel = f.channel();
             logger.info("客服端启动成功...");
 
@@ -81,6 +82,7 @@ public class NetClient {
                     }
                     Object msg = ceatePacket(packetId,codec,strings);
                     channel.writeAndFlush(msg);
+                    break;
                 }catch (Exception e){
                     e.printStackTrace();
                 }

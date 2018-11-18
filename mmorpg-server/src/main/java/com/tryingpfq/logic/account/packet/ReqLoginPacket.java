@@ -9,7 +9,7 @@ import com.tryingpfq.common.packet.PacketId;
  * @author tryingpfq
  * @date 2018/11/7 16:05
  */
-@Packet(PacketId.REQ_LOGIN)
+@Packet(value = PacketId.REQ_LOGIN,description = "请求登录")
 public class ReqLoginPacket extends AbstractPacket {
     @Protobuf(description = "账号")
     private String account;

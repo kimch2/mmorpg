@@ -18,11 +18,10 @@ public abstract class AbstractPacket {
     public abstract short getPacketId();
 
     //TODO 不知道为什么这个方法不执行
-  /*  @PostConstruct
+    @PostConstruct
     protected void dd(){
-       // ProtoFileUtils.createProtoFile(this);
-        System.out.println(System.currentTimeMillis());
+        ProtoFileUtils.createProtoFile(this);
         packetId.registerPacketId2AbstractPacket(this);
         packetId.registerPacketId2Codec(this);
-    }*/
+    }
 }
