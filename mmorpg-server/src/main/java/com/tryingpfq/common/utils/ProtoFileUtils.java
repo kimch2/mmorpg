@@ -37,12 +37,14 @@ public class ProtoFileUtils {
                 //生产文件
                 File file = new File(PATH+File.separator+packet.getClass().getSimpleName()+"_"+des+".proto");
                 try{
-                    boolean isnewFile = FileUtils.createFile(file);
-                    FileWriter fw = new FileWriter(file);
-                    fw.write(sb.toString());
-                    fw.flush();
-                    fw.close();
-                    logger.info("生成文件:{}",file.getAbsolutePath());
+                    if(FileUtils.createFile(file)){
+                        FileWriter fw = new FileWriter(file);
+                        fw.write(sb.toString());
+                        fw.flush();
+                        fw.close();
+                        logger.info("生成文件:{}",file.getAbsolutePath());
+                    }
+
                 }catch (Exception e){
                     e.printStackTrace();
                     logger.error("文件创建失败");

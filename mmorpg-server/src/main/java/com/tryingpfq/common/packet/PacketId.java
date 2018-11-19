@@ -25,6 +25,10 @@ public class PacketId {
     public static final short REQ_LOGIN = 10001;
     /**响应登陆**/
     public static final short RESP_LOGIN = 10002;
+    /***注册账号 **/
+    public static final short REQ_REGISTER = 10003;
+    /** 返回注册结果 **/
+    public static final short RESP_REGISTER = 10004;
 
 
     public void registerPacketId2AbstractPacket(AbstractPacket packet){

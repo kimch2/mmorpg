@@ -1,0 +1,5 @@
+// 返回注册结果
+message RespRegisterPacket {  
+// 注册结果 0:失败,1:成功
+optional int32 result=1;
+}

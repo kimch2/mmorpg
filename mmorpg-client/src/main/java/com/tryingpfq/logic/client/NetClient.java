@@ -82,7 +82,6 @@ public class NetClient {
                     }
                     Object msg = ceatePacket(packetId,codec,strings);
                     channel.writeAndFlush(msg);
-                    break;
                 }catch (Exception e){
                     e.printStackTrace();
                 }

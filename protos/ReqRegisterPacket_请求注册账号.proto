@@ -1,0 +1,7 @@
+// 请求注册账号
+message ReqRegisterPacket {  
+// 账号
+optional string account=1;
+// 密码
+optional string psw=2;
+}

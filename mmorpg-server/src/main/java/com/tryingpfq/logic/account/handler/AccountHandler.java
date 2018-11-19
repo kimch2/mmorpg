@@ -5,7 +5,9 @@ import com.annotation.WsRequest;
 import com.tryingpfq.common.domain.GameSession;
 import com.tryingpfq.common.packet.AbstractPacket;
 import com.tryingpfq.logic.account.packet.ReqLoginPacket;
+import com.tryingpfq.logic.account.packet.ReqRegisterPacket;
 import com.tryingpfq.logic.account.packet.RespLoginPacket;
+import com.tryingpfq.logic.account.packet.RespRegisterPacket;
 import com.tryingpfq.logic.account.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,6 +27,17 @@ public class AccountHandler {
             respPacket.setStatus(1);
         }else{
             respPacket.setStatus(0);
+        }
+        return respPacket;
+    }
+
+    @WsRequest
+    public AbstractPacket registerAccount(GameSession session, ReqRegisterPacket packet){
+        RespRegisterPacket respPacket = new RespRegisterPacket();
+        if(accountService.register(packet.getAccount(),packet.getPsw())){
+            respPacket.setResult((byte) 1);
+        }else{
+            respPacket.setResult((byte)0);
         }
         return respPacket;
     }

@@ -50,7 +50,7 @@ public class InvokerManager implements BeanPostProcessor{
                     Class<?>[] params = md.getParameterTypes();
                     Class cla = params[1];
                     packet2Invoker.put(cla,new InvokerDefinition(bean,md));
-                    break;
+                    continue;
                 }else{
                     logger.debug("{}中的{}方法没有消息包参数,不是WsRequest请求",
                             clazz.getName(),md.getName());

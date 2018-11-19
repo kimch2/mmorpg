@@ -67,13 +67,13 @@ public class NetServer {
             @Override
             protected void initChannel(SocketChannel ch) {
                 //websocket基于http协议传输，将请求和应答消息编码或解码为http消息
-                ch.pipeline().addLast("http-codec",new HttpServerCodec());
+                //ch.pipeline().addLast("http-codec",new HttpServerCodec());
                 //处理大文件传输情形 块的形式
                 ch.pipeline().addLast("http-chunked",new ChunkedWriteHandler());
                 //将HTTP消息的多个部分组合成一条完整的HTTP消息，分段-》聚合； 参数为聚合时的最大字节
                 //因为nett是分段请求的
                 ch.pipeline().addLast("aggregator",new HttpObjectAggregator(65535));
-                ch.pipeline().addLast(new WebSocketServerProtocolHandler("/ws"));
+                //ch.pipeline().addLast(new WebSocketServerProtocolHandler("/ws"));
                 ch.pipeline().addLast("gameSessionHandler",new GameSessionHandler());
                 ch.pipeline().addLast("binaryWebSocketFrameCodec",new BasePacketCodec());
                 ch.pipeline().addLast("dispatcherHandler",dispatcherHandler);
