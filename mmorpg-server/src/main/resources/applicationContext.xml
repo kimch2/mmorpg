@@ -18,4 +18,27 @@
         <constructor-arg value="10"></constructor-arg>
     </bean>
 
+    <!-- 数据库配置 -->
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="locations">
+            <list>
+                <value>classpath:jdbc.properties</value>
+                <value>classpath:server.properties</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- 定义数据源 -->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" destroy-method="close" >
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+        <property name="driverClassName" value="${jdbc.driverClassName}"/>
+    </bean>
+
+    <!-- session工厂 -->
+    <bean id="sessionFactory" class="">
+
+    </bean>
+
 </beans>
