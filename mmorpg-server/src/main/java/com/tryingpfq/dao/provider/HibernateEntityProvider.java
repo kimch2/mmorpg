@@ -1,6 +1,6 @@
 package com.tryingpfq.dao.provider;
 
-import com.annotation.IdGenerator;
+import com.tryingpfq.dao.anno.IdGenerator;
 import com.tryingpfq.dao.entity.IEntity;
 import com.utils.ReflectUtils;
 import org.hibernate.Transaction;

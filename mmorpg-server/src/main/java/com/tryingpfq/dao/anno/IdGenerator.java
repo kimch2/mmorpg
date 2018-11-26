@@ -1,4 +1,4 @@
-package com.annotation;
+package com.tryingpfq.dao.anno;
 
 import java.lang.annotation.*;
 
