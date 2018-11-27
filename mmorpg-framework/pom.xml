@@ -118,11 +118,17 @@
             <artifactId>guava</artifactId>
             <version>${guava-version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
             <version>${reflections-version}</version>
+        </dependency>
+
+        <!-- 缓存 -->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+            <version>${caffeine-version}</version>
         </dependency>
     </dependencies>
 </project>
