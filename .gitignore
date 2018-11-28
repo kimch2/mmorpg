@@ -1,3 +1,8 @@
 **/.idea
 **/target
+**/protos
 **/logs
+mmorpg.iml
+**/mmorpg-server.iml
+**/mmorpg-client.iml
+**/mmorpg-framework.iml
