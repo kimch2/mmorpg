@@ -51,13 +51,13 @@ public class NetClient {
             ChannelFuture f = bootstrap.connect().sync();
             final Channel channel = f.channel();
             logger.info("客服端启动成功...");
-
-            new Thread(){
+            new Thread(() -> clientSendPacket(channel)).start();
+           /* new Thread(){
                 @Override
                 public void run() {
                     clientSendPacket(channel);
                 }
-            }.start();
+            }.start();*/
         }catch (Exception e){
             e.printStackTrace();
         }
