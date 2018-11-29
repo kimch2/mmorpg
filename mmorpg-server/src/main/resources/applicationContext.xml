@@ -37,8 +37,15 @@
     </bean>
 
     <!-- session工厂 -->
-    <bean id="sessionFactory" class="">
+    <bean id="sessionFactory" class="com.tryingpfq.dao.EntityProviderSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
 
+        <!-- 根据注解方式自动扫描hibernate实体类 -->
+        <property name="packagesToScan">
+            <list>
+                <value>com.tryingpfq.**.entity</value>
+            </list>
+        </property>
     </bean>
-
 </beans>
