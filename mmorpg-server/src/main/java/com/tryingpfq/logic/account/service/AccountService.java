@@ -1,6 +1,11 @@
 package com.tryingpfq.logic.account.service;
 
+import com.tryingpfq.logic.account.entity.AccountEntity;
+import com.tryingpfq.logic.account.manager.AccountManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 /**
  * @author tryingpfq
@@ -8,13 +13,18 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class AccountService {
+    @Autowired
+    private AccountManager accountManager;
+
     public boolean login(String account,String psw){
-        System.out.println(account + ":" + psw);
-        return true;
+        List<AccountEntity> entityList = accountManager.loginAccountCheck(account,psw);
+        if(entityList!= null && entityList.size()>0){
+            return true;
+        }
+        return false;
     }
 
     public boolean register(String account,String psw){
-        System.out.println(account + ":" + psw);
-        return true;
+        return accountManager.register(account,psw);
     }
 }

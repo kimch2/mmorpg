@@ -6,3 +6,7 @@ mmorpg.iml
 **/mmorpg-server.iml
 **/mmorpg-client.iml
 **/mmorpg-framework.iml
+**/test
+mmorpg-framework/src/main/resources/
+mmorpg-server/src/main/java/com/tryingpfq/logic/base/ai/
+mmorpg-server/src/test/java/other/
