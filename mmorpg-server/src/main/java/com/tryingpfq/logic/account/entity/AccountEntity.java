@@ -30,7 +30,8 @@ public class AccountEntity implements IEntity<String> {
     @Column
     private String psw;
 
-   // private List<Integer> ids;
+    @Type(type = "json")
+    private List<Integer> ids;
 
     @Override
     public String getId() {
@@ -58,11 +59,11 @@ public class AccountEntity implements IEntity<String> {
         this.psw = psw;
     }
 
-   /* public List<Integer> getIds() {
+    public List<Integer> getIds() {
         return ids;
     }
 
     public void setIds(List<Integer> ids) {
         this.ids = ids;
-    }*/
+    }
 }

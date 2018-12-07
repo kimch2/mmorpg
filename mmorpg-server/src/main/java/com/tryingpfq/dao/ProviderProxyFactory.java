@@ -47,7 +47,7 @@ public class ProviderProxyFactory extends ClassLoader {
         //代理配名
         String className = superName + genericType1.getName() + genericType2.getName() + "Proxy";
 
-        String genericName = String.format("L%s<L%s;L%s;>;",genericType1.getName().replaceAll("\\.","/"),
+        String genericName = String.format("L%s<L%s;L%s;>;",superName,genericType1.getName().replaceAll("\\.","/"),
                 genericType2.getName().replaceAll("\\.","/"));
 
         ClassWriter classWriter = new ClassWriter(0);

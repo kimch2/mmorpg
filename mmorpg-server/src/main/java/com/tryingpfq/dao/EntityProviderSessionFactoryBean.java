@@ -1,7 +1,6 @@
 package com.tryingpfq.dao;
 
 import com.google.common.collect.Sets;
-import com.sun.xml.internal.rngom.parse.host.Base;
 import com.tryingpfq.dao.entity.IEntity;
 import com.tryingpfq.dao.provider.BaseEntityProvider;
 import com.tryingpfq.dao.provider.CacheEntityProvider;
