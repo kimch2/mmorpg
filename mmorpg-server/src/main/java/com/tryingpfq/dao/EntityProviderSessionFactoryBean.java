@@ -55,7 +55,8 @@ public class EntityProviderSessionFactoryBean extends LocalSessionFactoryBean im
                     return;
                 }
                 //生成代理类
-                o = ProviderProxyFactory.getInstance().createGenericClass(getBaseEntityProviderName(),clazz,genericType);
+                o = ProviderProxyFactory.getInstance().createBaseEntityProviderProxy(getBaseEntityProviderName(),clazz,genericType);
+                //注册到spring容器
                 this.beanFactory.registerSingleton(o.getClass().getName(),o);
             }catch (Exception e){
                 e.printStackTrace();

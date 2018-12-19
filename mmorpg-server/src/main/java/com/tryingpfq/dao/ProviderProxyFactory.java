@@ -1,5 +1,6 @@
 package com.tryingpfq.dao;
 
+import com.tryingpfq.dao.provider.BaseEntityProvider;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.asm.ClassWriter;
@@ -50,7 +51,7 @@ public class ProviderProxyFactory extends ClassLoader {
         String genericName = String.format("L%s<L%s;L%s;>;",superName,genericType1.getName().replaceAll("\\.","/"),
                 genericType2.getName().replaceAll("\\.","/"));
 
-        System.out.println("genericName:"+genericName);
+        //System.out.println("genericName:"+genericName);
         ClassWriter classWriter = new ClassWriter(0);
 
         //定义类头
@@ -71,4 +72,17 @@ public class ProviderProxyFactory extends ClassLoader {
         byte[] bytes = classWriter.toByteArray();
         return defineClass(className.replaceAll("/", "\\."), bytes, 0, bytes.length);
     }
+
+    public BaseEntityProvider createBaseEntityProviderProxy(String superProviderName, Class genericType1,Class genericType2){
+        Class<?> proxyClazz = createGenericClass(superProviderName,genericType1,genericType2);
+        BaseEntityProvider entityProvider = null;
+        try{
+            entityProvider = (BaseEntityProvider) proxyClazz.newInstance();
+        }catch (Exception e){
+            LOGGER.error("类%s实例化失败..",entityProvider.getClass().getSimpleName());
+            e.printStackTrace();
+        }
+        return entityProvider;
+    }
+
 }
