@@ -17,6 +17,6 @@ public class UUidGeneratorStrategy implements GeneratorStrategy<String> {
 
     @Override
     public String getGeneratorType() {
-        return "uuid";
+        return "uuId";
     }
 }

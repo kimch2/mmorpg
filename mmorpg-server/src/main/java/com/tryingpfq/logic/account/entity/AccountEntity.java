@@ -40,7 +40,7 @@ public class AccountEntity implements IEntity<String> {
 
     @Override
     public void setId(String s) {
-        this.id = id;
+        this.id = s;
     }
 
     public String getAccount() {

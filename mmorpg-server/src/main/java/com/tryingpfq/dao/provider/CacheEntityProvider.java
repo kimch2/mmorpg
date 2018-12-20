@@ -33,12 +33,15 @@ public class CacheEntityProvider<T extends IEntity<ID>,ID extends Serializable> 
         }catch (Exception e){
             throw  new GeneratorException("策略生成的id和实体id不一致");
         }
+        //加入缓存
         cache.put(entity.getId(),entity);
+        super.save(entity);
     }
 
     @Override
     public void update(T entity) {
         cache.put(entity.getId(),entity);
+        super.update(entity);
     }
 
     @Override
@@ -62,6 +65,7 @@ public class CacheEntityProvider<T extends IEntity<ID>,ID extends Serializable> 
     @Override
     public void delete(ID id) {
         cache.invalidate(id);
+        super.delete(id);
     }
 
     @Override

@@ -131,6 +131,7 @@ public class HibernateEntityProvider<T extends IEntity,ID extends Serializable> 
                 nameQuery.setParameter(i++,param);
             }
             List list = nameQuery.list();
+            transaction.commit();
             return list;
         });
     }
