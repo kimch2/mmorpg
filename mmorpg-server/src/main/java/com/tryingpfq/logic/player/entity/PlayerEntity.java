@@ -1,22 +1,55 @@
 package com.tryingpfq.logic.player.entity;
 
 import com.tryingpfq.common.domain.enums.RoleType;
+import com.tryingpfq.dao.anno.IdGenerator;
+import com.tryingpfq.dao.entity.IEntity;
+
+import javax.persistence.*;
+
 /**
  * Created by trying on 2018/10/26.
 */
-public class PlayerEntity {
-
+@Entity
+@NamedQueries({
+        @NamedQuery(name="findPlayerByAccount",query = "select p from PlayerEntity p where p.account = ?1"),
+        @NamedQuery(name="findPlayerById",query = "select p from PlayerEntity p where p.id = ?1"),
+        @NamedQuery(name="findPlayerByName",query = "select p from PlayerEntity p where p.name = ?1")
+})
+public class PlayerEntity implements IEntity<Long> {
+    @Id
+    @Column
+    @IdGenerator("snowflakeid")
     private long playerId;    //ID
+    @Column
     private String account;     //账户
-    private String server;
+    //private String server;
+    @Column
     private String name;    //昵称
+    @Column
     private RoleType roleType;   //职业
+    @Column
     private byte gender;        //性别
-    private int scene;          //当前场景
+    @Column
+    private int sceneId;          //当前场景
+    @Column
     private int x;              //坐标X
+    @Column
     private int y;              //坐标Y
+    @Column
     private int level;          //等级
+    @Column
+    private int exp;            //当前等级对应的经验值
+    @Column
     private long glod;            //元宝
+
+    public PlayerEntity(){}
+
+    public PlayerEntity(String account,String name,RoleType type,byte sex){
+        this.account = account;
+        this.name = name;
+        this.roleType = type;
+        this.gender = sex;
+    }
 
     public long getPlayerId() {
         return playerId;
@@ -32,14 +65,6 @@ public class PlayerEntity {
 
     public void setAccount(String account) {
         this.account = account;
-    }
-
-    public String getServer() {
-        return server;
-    }
-
-    public void setServer(String server) {
-        this.server = server;
     }
 
     public String getName() {
@@ -66,12 +91,12 @@ public class PlayerEntity {
         this.gender = gender;
     }
 
-    public int getScene() {
-        return scene;
+    public int getSceneId() {
+        return sceneId;
     }
 
-    public void setScene(int scene) {
-        this.scene = scene;
+    public void setSceneId(int scene) {
+        this.sceneId = scene;
     }
 
     public int getX() {
@@ -104,5 +129,23 @@ public class PlayerEntity {
 
     public void setGlod(long glod) {
         this.glod = glod;
+    }
+
+    public int getExp() {
+        return exp;
+    }
+
+    public void setExp(int exp) {
+        this.exp = exp;
+    }
+
+    @Override
+    public Long getId() {
+        return playerId;
+    }
+
+    @Override
+    public void setId(Long id) {
+        this.playerId = id;
     }
 }

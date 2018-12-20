@@ -17,7 +17,8 @@ import java.util.List;
  */
 @Entity
 @NamedQueries({@NamedQuery(name = "findAccountByAccountAndPsw", query = "select account from AccountEntity account " +
-        "where account.account =? and account.psw = ?")})
+        "where account.account =? and account.psw = ?")
+})
 public class AccountEntity implements IEntity<String> {
     @Id
     @Column
