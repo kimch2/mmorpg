@@ -13,7 +13,9 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.InstantiationAwareBeanPostProcessor;
 import org.springframework.core.Ordered;
 import org.springframework.core.PriorityOrdered;
+import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
+import org.springframework.orm.hibernate5.support.HibernateDaoSupport;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -56,8 +58,12 @@ public class EntityProviderSessionFactoryBean extends LocalSessionFactoryBean im
                 }
                 //生成代理类
                 o = ProviderProxyFactory.getInstance().createBaseEntityProviderProxy(getBaseEntityProviderName(),clazz,genericType);
-                //注册到spring容器
-                this.beanFactory.registerSingleton(o.getClass().getName(),o);
+                if(o != null && o instanceof HibernateDaoSupport){
+                    //设置HibernateTemplate 并且注册到spring容器
+                    ((HibernateDaoSupport) o).setSessionFactory(getObject());
+                    this.beanFactory.registerSingleton(o.getClass().getName(),o);
+                }
+
             }catch (Exception e){
                 e.printStackTrace();
             }
