@@ -42,7 +42,7 @@ public class AccountManager {
      * @param psw
      * @return
      */
-    private boolean checkIsExit(String account,String psw){
+    public boolean checkIsExit(String account,String psw){
         List<AccountEntity> entitys = accountEntityProvide.query("findAccountByAccountAndPsw",account,psw);
         if(entitys.size() > 0){
             return true;
@@ -50,5 +50,16 @@ public class AccountManager {
         return false;
     }
 
+    public void save(AccountEntity entity){
+        accountEntityProvide.save(entity);
+    }
 
+    public void update(AccountEntity entity){
+        accountEntityProvide.update(entity);
+    }
+
+    public AccountEntity query(String account,String psw){
+        List<AccountEntity> entities = accountEntityProvide.query("findAccountByAccountAndPsw",account,psw);
+        return entities.get(0);
+    }
 }
