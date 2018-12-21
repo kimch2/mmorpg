@@ -15,7 +15,7 @@ public class ReqCreateRolePacket extends AbstractPacket {
     @Protobuf(description = "角色名")
     private String roleName;
     @Protobuf(description = "性别")
-    private byte sex;
+    private int sex;
     @Protobuf(description = "职业")
     private RoleType roleType;
 
@@ -27,11 +27,11 @@ public class ReqCreateRolePacket extends AbstractPacket {
         this.roleName = roleName;
     }
 
-    public byte getSex() {
+    public int getSex() {
         return sex;
     }
 
-    public void setSex(byte sex) {
+    public void setSex(int sex) {
         this.sex = sex;
     }
 

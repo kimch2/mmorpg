@@ -32,8 +32,8 @@ public class PlayerManager {
     /**
      * 创建角色
      */
-    public PlayerEntity createRole(String account,String name, RoleType type,byte sex){
-        PlayerEntity entity = new PlayerEntity(account,name,type,sex);
+    public PlayerEntity createRole(String account,String name, RoleType type,int sex){
+        PlayerEntity entity = new PlayerEntity(account,name,type, (byte) sex);
         try{
             playerEntityProvider.save(entity);
         }catch (Exception e){

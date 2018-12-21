@@ -26,12 +26,12 @@ public class PlayerService {
     public void createRole(GameSession session, ReqCreateRolePacket packet){
         String name = packet.getRoleName();
         RoleType roleType = packet.getRoleType();
-        byte sex = packet.getSex();
+        int sex = packet.getSex();
         logger.info("创建角色：{} sex:{} role:{}",name,roleType,sex);
         PlayerEntity entity = playerManager.findByName(name);
         RespCreateRolePacket respPacket = new RespCreateRolePacket();
         if(entity == null){
-            respPacket.setResult((byte)0);
+            respPacket.setResult(0);
             session.sendPacket(packet);
             return;
         }
@@ -39,7 +39,7 @@ public class PlayerService {
         entity = playerManager.createRole(account,name,roleType,sex);
         if(entity != null){
             CreateRoleVo roleInfo = CreateRoleVo.valueOf(entity);
-            respPacket.setResult((byte) 1);
+            respPacket.setResult(1);
             respPacket.setPlayerId(entity.getPlayerId());
             respPacket.setRoleInfo(roleInfo);
             logger.info("{}角色创建成功",name);

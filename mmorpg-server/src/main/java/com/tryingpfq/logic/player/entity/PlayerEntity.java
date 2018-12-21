@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NamedQueries({
         @NamedQuery(name="findPlayerByAccount",query = "select p from PlayerEntity p where p.account = ?1"),
         @NamedQuery(name="findPlayerById",query = "select p from PlayerEntity p where p.id = ?1"),
-        @NamedQuery(name="findPlayerByName",query = "select p from PlayerEntity p where p.name = ?1")
+        @NamedQuery(name="findPlayerByName",query = "select p from PlayerEntity p where p.name = ?")
 })
 public class PlayerEntity implements IEntity<Long> {
     @Id

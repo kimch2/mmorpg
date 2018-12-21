@@ -12,7 +12,7 @@ import com.tryingpfq.common.packet.PacketId;
 @Packet(value = PacketId.RESP_CREATE_ROLE,description = "返回创建角色结果")
 public class RespCreateRolePacket extends AbstractPacket {
     @Protobuf(description = "结果状态")
-    private byte result;
+    private int result;
 
     @Protobuf(description = "角色id")
     private long playerId;
@@ -20,11 +20,11 @@ public class RespCreateRolePacket extends AbstractPacket {
     @Protobuf(description = "创建的角色信息")
     private CreateRoleVo roleInfo;
 
-    public byte getResult() {
+    public int getResult() {
         return result;
     }
 
-    public void setResult(byte result) {
+    public void setResult(int result) {
         this.result = result;
     }
 

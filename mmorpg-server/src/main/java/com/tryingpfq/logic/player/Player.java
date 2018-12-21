@@ -4,6 +4,7 @@ import com.base.Point;
 import com.net.codec.Request;
 import com.net.codec.Response;
 import com.tryingpfq.common.domain.GameSession;
+import com.tryingpfq.common.packet.AbstractPacket;
 import com.tryingpfq.common.utils.Profile;
 import com.tryingpfq.common.utils.TimeUtils;
 import com.tryingpfq.logic.base.rpc.IPlayerMessage;
@@ -270,7 +271,7 @@ public class Player {
     /**
      * 用于服务端向客服端返回数据
      */
-    public void sendPacket(Response packet){
+    public void sendPacket(AbstractPacket packet){
         try{
             if(gameSession != null){
                 gameSession.sendPacket(packet);

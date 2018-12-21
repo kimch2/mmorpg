@@ -1,6 +1,7 @@
 package com.tryingpfq.logic.player.handler;
 
 import com.annotation.WsController;
+import com.annotation.WsRequest;
 import com.tryingpfq.common.domain.GameSession;
 import com.tryingpfq.logic.player.packet.ReqCreateRolePacket;
 import com.tryingpfq.logic.player.service.PlayerService;
@@ -19,7 +20,8 @@ public class PlayerHandler {
     @Autowired
     private PlayerService playerService;
 
+    @WsRequest
     public void createRoel(GameSession session, ReqCreateRolePacket packet){
-
+        playerService.createRole(session,packet);
     }
 }
