@@ -1,5 +1,6 @@
 package com.tryingpfq.logic.account.manager;
 
+import com.tryingpfq.common.utils.SecurityUtils;
 import com.tryingpfq.dao.provider.BaseEntityProvider;
 import com.tryingpfq.logic.account.entity.AccountEntity;
 import org.slf4j.Logger;
@@ -28,8 +29,9 @@ public class AccountManager {
     public boolean register(String account,String psw){
         AccountEntity entity = new AccountEntity();
         entity.setAccount(account);
-        entity.setPsw(psw);
-        if(checkIsExit(account,psw)){
+        String md5Code = SecurityUtils.getMd5Code(psw);
+        entity.setPsw(md5Code);
+        if(checkIsExit(account,md5Code)){
             //提示失败，账号存在
         }
         accountEntityProvide.save(entity);
