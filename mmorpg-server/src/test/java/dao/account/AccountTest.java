@@ -40,10 +40,15 @@ public class AccountTest {
     public void add(){
         AccountEntity entity = new AccountEntity();
         entity.setAccount("admin");
-        entity.setPsw("admin");
+        entity.setPsw("md5");
         List<Integer> ids = Lists.newArrayList();
         ids.add(200002);
         entity.setIds(ids);
         accountManager.save(entity);
+    }
+
+    @Test
+    public void register(){
+        accountManager.register("admin","admin");
     }
 }
