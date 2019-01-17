@@ -5,6 +5,8 @@ import com.net.codec.Request;
 import com.net.codec.Response;
 import com.tryingpfq.common.domain.GameSession;
 import com.tryingpfq.common.packet.AbstractPacket;
+import com.tryingpfq.common.timer.user.IUserCronEventHandler;
+import com.tryingpfq.common.timer.user.UserCronEventService;
 import com.tryingpfq.common.utils.Profile;
 import com.tryingpfq.common.utils.TimeUtils;
 import com.tryingpfq.logic.base.rpc.IPlayerMessage;
@@ -12,6 +14,7 @@ import com.tryingpfq.logic.player.entity.PlayerEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReferenceFieldUpdater;
@@ -76,6 +79,10 @@ public class Player {
      */
     private PlayerEntity playerEntity;
 
+    /**
+     * 长周期刷新时间计时器
+     */
+    private long nextCheckCronTime;
 
     /**
      * 添加消息包
@@ -130,6 +137,27 @@ public class Player {
             Profile.profile(packet,TimeUtils.getCurrentMillisTime() - statTime);
         }
     }
+
+    /**
+     * 在玩家心跳中处理周期时间，并且保证重新登陆后会执行
+     * @param utime
+     */
+   public void processUserCronEvent(long utime){
+        try{
+            if(nextCheckCronTime <= utime){
+                //long lastUpdataAt = playerEntity.getLastCheckCronAt();
+                UserCronEventService cronEventService = UserCronEventService.getInstance();
+                List<IUserCronEventHandler> handlers = cronEventService.getHandlerAfter(utime);
+                for(IUserCronEventHandler handler : handlers){
+                    handler.handler(this);
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        //playerEntity.changeLastCheckCronAt(utime);
+   }
+
 
     public boolean addPlayerMessage(IPlayerMessage message){
         if(this.playerMessageEnable.get()){
