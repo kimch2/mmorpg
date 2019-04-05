@@ -2,6 +2,7 @@ package com.tryingpfq.common.domain;
 
 import com.net.codec.Response;
 import com.tryingpfq.common.domain.enums.CloseCause;
+import com.tryingpfq.common.packet.AbstractPacket;
 import com.tryingpfq.logic.player.Player;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
@@ -137,10 +138,11 @@ public class GameSession implements Session{
     public String getAsKey(){
         return account_server;
     }
-    public void sendPacket(Response packet) {
+    public void sendPacket(AbstractPacket packet) {
         if(packet == null){
             return ;
         }
+        this.getChannel().writeAndFlush(packet);
 /*      Response response = packet.write()
         if(response == null){
             return;

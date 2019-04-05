@@ -29,6 +29,10 @@ public class PacketId {
     public static final short REQ_REGISTER = 10003;
     /** 返回注册结果 **/
     public static final short RESP_REGISTER = 10004;
+    /** 创建角色信息 **/
+    public static final short REQ_CREATE_ROLE = 10005;
+    /** 返回创建角色信息 **/
+    public static final short RESP_CREATE_ROLE = 10006;
 
 
     public void registerPacketId2AbstractPacket(AbstractPacket packet){
