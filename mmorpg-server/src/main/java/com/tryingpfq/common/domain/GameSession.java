@@ -44,7 +44,7 @@ public class GameSession implements Session{
         return logger;
     }
 
-    public static Session valueOf(Channel channel){
+    public static Session valueOf(Channel channel){     // 静态工程方法
         GameSession gameSession = new GameSession();
         gameSession.id = SEQ.getAndIncrement();
         gameSession.channel = channel;

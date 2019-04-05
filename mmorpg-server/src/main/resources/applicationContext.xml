@@ -37,8 +37,9 @@
     </bean>
 
     <!-- session工厂 -->
-    <bean id="sessionFactory" class="">
-
+    <bean id="sessionFactory" class="com.tryingpfq.dao.EntityProviderSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="configLocation" value="classpath:hibernate.cfg.xml"/>
     </bean>
 
 </beans>
