@@ -1,6 +1,8 @@
 package com.tryingpfq.logic.fightteam.entity;
 
+import com.tryingpfq.common.domain.enums.RoleType;
 import com.tryingpfq.dao.entity.IEntity;
+import com.tryingpfq.logic.fightteam.FightTeamJobType;
 
 /**
  * @Author Tryingpfq
@@ -13,13 +15,19 @@ public class TeamMemberEntity implements IEntity<Long> {
 
     private String pName;
 
-    private byte jobType;
+    private RoleType roleType;
+
+    private FightTeamJobType teamJobType;
 
     private int fightForce;
 
     private long enterTime;
 
 
+    //
+    public boolean isLeader(){
+        return teamJobType.getType() == FightTeamJobType.LEADER.getType();
+    }
 
     @Override
     public Long getId() {
@@ -29,5 +37,33 @@ public class TeamMemberEntity implements IEntity<Long> {
     @Override
     public void setId(Long aLong) {
 
+    }
+
+    public long getPid() {
+        return pid;
+    }
+
+    public long getTeamId() {
+        return teamId;
+    }
+
+    public String getpName() {
+        return pName;
+    }
+
+    public RoleType getRoleType() {
+        return roleType;
+    }
+
+    public FightTeamJobType getTeamJobType() {
+        return teamJobType;
+    }
+
+    public int getFightForce() {
+        return fightForce;
+    }
+
+    public long getEnterTime() {
+        return enterTime;
     }
 }

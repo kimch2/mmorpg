@@ -1,5 +1,6 @@
 package com.tryingpfq.logic.fightteam.entity;
 
+import com.google.common.collect.Lists;
 import com.tryingpfq.dao.entity.IEntity;
 
 import javax.persistence.Id;
@@ -14,13 +15,13 @@ public class FightTeamEntity implements IEntity<Long> {
     @Id
     private long teamId;
 
-    private long leaderId;
-
     private String tName;
 
     private long createTime;
 
-    private List<TeamMemberEntity> memeberList;
+    private TeamMemberEntity leader;
+
+    private List<TeamMemberEntity> memeberList = Lists.newArrayList();
 
 
     @Override
@@ -33,5 +34,18 @@ public class FightTeamEntity implements IEntity<Long> {
 
     }
 
+    /** logic **/
+    public TeamMemberEntity getLeader(){
+        if (leader != null) {
+            return leader;
+        }
+        for (TeamMemberEntity member : memeberList) {
+            if (member.isLeader()) {
+                this.leader = member;
+                return member;
+            }
+        }
+        throw new RuntimeException("this team error : is not leader");
+    }
 
 }

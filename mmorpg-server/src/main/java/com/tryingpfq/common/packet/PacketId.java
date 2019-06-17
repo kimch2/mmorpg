@@ -35,6 +35,12 @@ public class PacketId {
     public static final short RESP_CREATE_ROLE = 10006;
 
 
+    //战队
+    /** 创建战队 **/
+    public static final short REQ_CREATE_FIGHT_TEAM = 20001;
+
+
+
     public void registerPacketId2AbstractPacket(AbstractPacket packet){
         packetId2AbstractPacket.put(packet.getPacketId(),packet);
     }
