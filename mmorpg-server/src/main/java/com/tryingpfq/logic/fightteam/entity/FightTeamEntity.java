@@ -15,6 +15,8 @@ public class FightTeamEntity implements IEntity<Long> {
     @Id
     private long teamId;
 
+    private long pid;
+
     private String tName;
 
     private long createTime;
@@ -34,6 +36,16 @@ public class FightTeamEntity implements IEntity<Long> {
 
     }
 
+    public FightTeamEntity(){
+
+    }
+
+    public FightTeamEntity(long teamId, long pid, String tName) {
+        this.teamId = teamId;
+        this.pid = pid;
+        this.tName = tName;
+    }
+
     /** logic **/
     public TeamMemberEntity getLeader(){
         if (leader != null) {
@@ -48,4 +60,47 @@ public class FightTeamEntity implements IEntity<Long> {
         throw new RuntimeException("this team error : is not leader");
     }
 
+    public long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(long teamId) {
+        this.teamId = teamId;
+    }
+
+    public long getPid() {
+        return pid;
+    }
+
+    public void setPid(long pid) {
+        this.pid = pid;
+    }
+
+    public String gettName() {
+        return tName;
+    }
+
+    public void settName(String tName) {
+        this.tName = tName;
+    }
+
+    public long getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(long createTime) {
+        this.createTime = createTime;
+    }
+
+    public void setLeader(TeamMemberEntity leader) {
+        this.leader = leader;
+    }
+
+    public List<TeamMemberEntity> getMemeberList() {
+        return memeberList;
+    }
+
+    public void setMemeberList(List<TeamMemberEntity> memeberList) {
+        this.memeberList = memeberList;
+    }
 }
