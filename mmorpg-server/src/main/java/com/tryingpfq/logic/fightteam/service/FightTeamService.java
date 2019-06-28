@@ -28,7 +28,7 @@ public class FightTeamService {
             //提示
             return;
         }
-
+        fightTeamManager.create(player,name);
 
     }
 }

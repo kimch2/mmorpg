@@ -38,6 +38,9 @@ public class PacketId {
     //战队
     /** 创建战队 **/
     public static final short REQ_CREATE_FIGHT_TEAM = 20001;
+    public static final short REQ_APPLY_JOIN_FIGHT_TEAM = 20002;
+
+
 
 
 

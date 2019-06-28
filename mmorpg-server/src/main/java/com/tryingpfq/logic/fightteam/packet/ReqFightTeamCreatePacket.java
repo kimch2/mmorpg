@@ -18,4 +18,12 @@ public class ReqFightTeamCreatePacket extends AbstractPacket {
     public short getPacketId() {
         return PacketId.REQ_CREATE_FIGHT_TEAM;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }
