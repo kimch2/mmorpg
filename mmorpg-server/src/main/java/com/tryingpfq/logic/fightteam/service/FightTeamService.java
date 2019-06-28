@@ -1,5 +1,6 @@
 package com.tryingpfq.logic.fightteam.service;
 
+import com.tryingpfq.logic.fightteam.entity.FightTeamEntity;
 import com.tryingpfq.logic.fightteam.manager.FightTeamManager;
 import com.tryingpfq.logic.player.Player;
 import org.apache.commons.lang3.StringUtils;
@@ -30,5 +31,17 @@ public class FightTeamService {
         }
         fightTeamManager.create(player,name);
 
+    }
+
+    public boolean applyjoinTeam(Player player,long teamId){
+        FightTeamEntity teamEntity = fightTeamManager.getTeamEntityById(teamId);
+        if (teamEntity == null) {
+            return false;
+        }
+        //判断玩家是否在战队中
+        if (fightTeamManager.getTeamEntityByPlayerId(player.getId()) == null) {
+            return false;
+        }
+        return true;
     }
 }

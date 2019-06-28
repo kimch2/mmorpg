@@ -40,6 +40,8 @@ public class PacketId {
     public static final short REQ_CREATE_FIGHT_TEAM = 20001;
     public static final short REQ_APPLY_JOIN_FIGHT_TEAM = 20002;
 
+    public static final short REQ_DEAL_TEAM_APPLY = 20003;
+
 
 
 

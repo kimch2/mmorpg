@@ -31,6 +31,14 @@ public class FightTeamManager {
         return fightTeamEntity;
     }
 
+    public FightTeamEntity getTeamEntityById(long teamId) {
+        return fightTeamEntityProvider.get(teamId);
+    }
+
+    public FightTeamEntity getTeamEntityByPlayerId(long playeId) {
+        return null;
+    }
+
     public boolean registerName(String name) {
         return registerName.add(name);
     }
